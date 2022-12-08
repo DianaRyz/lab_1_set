@@ -14,9 +14,9 @@ Set::~Set() {
 
 int Set::operator[](const int index) { //получение числа по его индексу 
     if (!arr)
-        throw "arr == nullptr";
+        throw std::logic_error("arr == nullptr");
     if (index > size - 1 || index < 0)
-        throw "invalide index";
+        throw std::logic_error("invalide index");
     return arr[index];
 }
 
@@ -87,7 +87,7 @@ Set& Set::operator+(int num) { //добавление числа во множество
 Set& Set::operator-(int num) //удаление числа из множества
 {
     if (check_num(num) == false)
-        throw "Set have not got this num";
+        throw std::logic_error("Set have not got this num");
     for (int i = 0; i < size; i++) {
         if (arr[i] == num)
         {
@@ -124,7 +124,7 @@ Set& Set::operator+=(int num) { //добавление числа во множество
 
 Set& Set::operator-=(int num) { //удаление числа из множества
     if (check_num(num) == false)
-        throw "Set have not got this num";
+        throw std::logic_error("Set have not got this num");
     for (int i = 0; i < size; i++) {
         if (arr[i] == num)
         {
@@ -163,7 +163,7 @@ Set Set::intersection(const Set& second) { //пересечение множеств
 
 bool Set::check_count(const Set& second) { // элементы 1 множества хотя бы раз встречаются во втором
     if (!arr)
-        throw "arr == nullptr";
+        throw std::logic_error("arr == nullptr");
     bool flag = false;
     for (int i = 0; i < size; i++)
     {
@@ -209,7 +209,7 @@ bool Set::operator!=(const Set& second) { //неравенство множеств
 
 bool Set::check_num(int num) { //проверка наличия числа во множестве
     if (!arr)
-        throw "arr == nullptr in check_num";
+        throw std::logic_error("arr == nullptr in check_num");
     for (int i = 0; i < size; i++) {
         if (num == arr[i])
             return true;
