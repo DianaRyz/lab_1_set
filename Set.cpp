@@ -21,9 +21,8 @@ int Set::operator[](const int index) { //получение числа по его индексу
 }
 
 
-Set Set::operator+(const Set& second) { //объединение множеств
-    Set res;
-    res.arr = new int[size + second.size];
+Set Set::operator+(const Set& second) { //объединение множеств 
+    Set res(size + second.size);
     res.size = 0;
     for (int i = 0; i < size; i++) {
         res.arr[i] = arr[i];
@@ -40,9 +39,8 @@ Set Set::operator+(const Set& second) { //объединение множеств
 }
 
 
-Set Set::operator-(const Set& second) { //разность множеств
-    Set res;
-    res.arr = new int[size];
+Set Set::operator-(const Set& second) { //разность множеств  
+    Set res(size);
     res.size = 0;
     bool flag = false;
     for (int i = 0; i < size; i++) {
@@ -66,19 +64,18 @@ Set Set::operator-(const Set& second) { //разность множеств
 Set& Set::operator+(int num) { //добавление числа во множество
     if (!arr)
     {
-        arr = new int[capacity];
+        arr = new int[size];
         arr[0] = num;
         size++;
     }
     if (check_num(num) == false)
     {
-        int* arr_n = new int[size + 1];
+        Set arr_n(size + 1);
         for (int i = 0; i < size; i++) {
-            arr_n[i] = arr[i];
+            arr_n.arr[i] = arr[i];
         }
-        arr_n[size] = num;
-        delete[] arr;
-        arr = arr_n;
+        arr_n.arr[size] = num;
+        arr = arr_n.arr;
         size++;
     }
     return *this;
@@ -101,22 +98,23 @@ Set& Set::operator-(int num) //удаление числа из множества
     return *this;
 }
 
-Set& Set::operator+=(int num) { //добавление числа во множество
+Set& Set::operator+=(int num) { //добавление числа во множество 
+
     if (!arr)
     {
-        arr = new int[capacity];
+        arr = new int[size];
         arr[0] = num;
         size++;
     }
     if (check_num(num) == false)
     {
-        int* arr_n = new int[size + 1];
+        Set _arr(size + 1);
         for (int i = 0; i < size; i++) {
-            arr_n[i] = arr[i];
+            _arr.arr[i] = arr[i]; 
+            _arr.arr[size] = 0;
         }
-        arr_n[size] = num;
-        delete[] arr;
-        arr = arr_n;
+        _arr.arr[size] += num;
+        arr = _arr.arr;
         size++;
     }
     return *this;
@@ -139,8 +137,7 @@ Set& Set::operator-=(int num) { //удаление числа из множества
 }
 
 Set Set::intersection(const Set& second) { //пересечение множеств
-    Set res;
-    res.arr = new int[size];
+    Set res(size);
     res.size = 0;
     bool flag = false;
     for (int i = 0; i < size; i++) {
@@ -183,24 +180,37 @@ bool Set::operator==(const Set& second) { //равенство множеств
         return false;
     else
     {
-        bool flag = true;
+        bool flag = false; // 2 3 и 3 2 
         for (int i = 0; i < size; i++)
         {
-            if (arr[i] != second.arr[i])
-                flag = false;
+            flag = false;
+            for (int j = 0; j < second.size; j++) {
+                if (arr[i] == second.arr[j]) {
+                    flag = true;
+                }
+            }
+            if (flag == false)
+                return false;
         }
-        return flag;
+        return true;
     }
 }
 
-bool Set::operator!=(const Set& second) { //неравенство множеств
+bool Set::operator!=(const Set& second) { //неравенство множеств 
     if (second.size != size)
         return true;
     else
     {
+        bool flag = true; // 2 3 и 3 2 
         for (int i = 0; i < size; i++)
         {
-            if (arr[i] != second.arr[i])
+            flag = true;
+            for (int j = 0; j < second.size; j++) {
+                if (arr[i] == second.arr[j]) {
+                    flag = false;
+                }
+            }
+            if (flag == true)
                 return true;
         }
         return false;

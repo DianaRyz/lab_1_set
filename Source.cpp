@@ -4,6 +4,30 @@
 int main() {
 	try {
 		Set set1;
+		set1 + 1;
+		set1 + 2;
+		set1 + 3;
+		std::cout << "set 1: " << set1 << std::endl;
+
+		Set set2(set1);
+		set2 + 4;
+		set2 += 5;
+		set2 += 6;
+		set2 + 7;
+		std::cout << "set 2: " << set2 << std::endl;
+
+		std::cout << "Equality: " << (set1 == set2) << std::endl;
+		std::cout << "! Equality: " << (set1 != set2) << std::endl;
+	}
+	catch (std::exception& ex)
+	{
+		std::cout << ex.what() << std::endl;
+	}
+
+}
+
+/*try {
+		Set set1;
 		Set set2;
 
 		set1 + 1;
@@ -30,7 +54,7 @@ int main() {
 		set2 - 4;
 		set2 -= 1;
 		set1 - 4;
-		set1 -= 1;
+		set1 -= 11;
 		std::cout << "New Set 1: " << set1 << std::endl;
 		std::cout << "New Set 2: " << set2 << std::endl;
 
@@ -43,6 +67,4 @@ int main() {
 	catch (std::exception& ex)
 	{
 		std::cout << ex.what() << std::endl;
-	}
-
-}
+	}*/

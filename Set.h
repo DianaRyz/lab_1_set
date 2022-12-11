@@ -5,12 +5,11 @@
 class Set {
 	int* arr;
 	int size;
-	int capacity = 10;
 
 public:
 	Set() : arr(nullptr), size(0) {} 
 	Set(int size) : arr(new int[size]), size(size) {} 
-	Set(const Set& second);
+	Set(const Set& second); 
 	~Set();
 
 	int operator[](const int index);
