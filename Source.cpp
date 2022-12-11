@@ -7,14 +7,20 @@ int main() {
 		set1 + 1;
 		set1 + 2;
 		set1 + 3;
+		set1 += 4;
 		std::cout << "set 1: " << set1 << std::endl;
 
 		Set set2(set1);
+		Set set3(set1);
+
+		set3 = set2 + 66;
 		set2 + 4;
 		set2 += 5;
 		set2 += 6;
 		set2 + 7;
+		set3 = set2 + 61;
 		std::cout << "set 2: " << set2 << std::endl;
+		std::cout << "set 3: " << set3 << std::endl;
 
 		std::cout << "Equality: " << (set1 == set2) << std::endl;
 		std::cout << "! Equality: " << (set1 != set2) << std::endl;

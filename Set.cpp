@@ -98,26 +98,25 @@ Set& Set::operator-(int num) //удаление числа из множества
     return *this;
 }
 
-Set& Set::operator+=(int num) { //добавление числа во множество 
-
-    if (!arr)
-    {
-        arr = new int[size];
-        arr[0] = num;
-        size++;
-    }
-    if (check_num(num) == false)
-    {
-        Set _arr(size + 1);
-        for (int i = 0; i < size; i++) {
-            _arr.arr[i] = arr[i]; 
-            _arr.arr[size] = 0;
+Set& operator+=(Set& _arr, int num) //добавление числа во множество
+{
+    bool flag = false;
+    for (int i = 0; i < _arr.size; i++) {
+        flag = false;
+        if (num == _arr.arr[i]) {
+            throw std::logic_error("Set have got this num");
         }
-        _arr.arr[size] += num;
-        arr = _arr.arr;
-        size++;
     }
-    return *this;
+    if (flag == false) {
+        Set tmp(_arr.size);
+        for (int i = 0; i < _arr.size; i++) {
+            tmp.arr[i] = _arr.arr[i];
+        }
+        tmp.arr[tmp.size] = num;
+        _arr.arr = tmp.arr;
+        _arr.size++;
+    }
+    return _arr;
 }
 
 Set& Set::operator-=(int num) { //удаление числа из множества
