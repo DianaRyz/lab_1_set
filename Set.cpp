@@ -61,62 +61,69 @@ Set Set::operator-(const Set& second) { //разность множеств
     return res;
 }
 
-Set& Set::operator+(int num) { //добавление числа во множество
+Set Set::operator+(int num) { //добавление числа во множество
     if (!arr)
     {
-        arr = new int[size];
-        arr[0] = num;
-        size++;
+        Set arr_n(size);
+        arr_n.arr[0] = num;
+        arr_n.size++;
+        return arr_n;
+
     }
-    if (check_num(num) == false)
-    {
-        Set arr_n(size + 1);
-        for (int i = 0; i < size; i++) {
-            arr_n.arr[i] = arr[i];
+    else {
+        if (check_num(num) == false)
+        {
+            Set arr_n(size + 1);
+            for (int i = 0; i < size; i++) {
+                arr_n.arr[i] = arr[i];
+            }
+            arr_n.arr[size] = num;
+            //arr = arr_n.arr;
+            return arr_n;
         }
-        arr_n.arr[size] = num;
-        arr = arr_n.arr;
-        size++;
     }
-    return *this;
 }
 
-Set& Set::operator-(int num) //удаление числа из множества
+Set Set::operator-(int num) //удаление числа из множества
 {
-    if (check_num(num) == false)
-        throw std::logic_error("Set have not got this num");
-    for (int i = 0; i < size; i++) {
-        if (arr[i] == num)
+    Set arr_n(size);
+    for (int i = 0; i < arr_n.size; i++) { //перезаписываем сет1 в сет2
+        arr_n.arr[i] = arr[i];
+    }
+    for (int i = 0; i < arr_n.size; i++) {
+        if (arr_n.arr[i] == num)
         {
-            for (int j = i; j < size - 1; j++) {
-                arr[j] = arr[j + 1];
+            for (int j = i; j < arr_n.size - 1; j++) {
+                arr_n.arr[j] = arr_n.arr[j + 1];
             }
-            size--;
+            arr_n.size--;
             break;
         }
+        else throw std::logic_error("Set have not got this num");
     }
-    return *this;
+    return arr_n;
 }
 
-Set& operator+=(Set& _arr, int num) //добавление числа во множество
+Set& Set::operator+=(int num) //добавление числа во множество
 {
-    bool flag = false;
-    for (int i = 0; i < _arr.size; i++) {
-        flag = false;
-        if (num == _arr.arr[i]) {
-            throw std::logic_error("Set have got this num");
-        }
+    if (!arr)
+    {
+        Set tmp(size);
+        tmp.arr[0] = num;
+        arr = tmp.arr;
+        size++;
+
     }
-    if (flag == false) {
-        Set tmp(_arr.size);
-        for (int i = 0; i < _arr.size; i++) {
-            tmp.arr[i] = _arr.arr[i];
+    if (check_num(num) == false) {
+        Set tmp(size);
+        for (int i = 0; i < size; i++) {
+            tmp.arr[i] = arr[i];
         }
         tmp.arr[tmp.size] = num;
-        _arr.arr = tmp.arr;
-        _arr.size++;
+        arr = tmp.arr;
+        size++;
     }
-    return _arr;
+    return *this;
 }
 
 Set& Set::operator-=(int num) { //удаление числа из множества

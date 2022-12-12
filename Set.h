@@ -17,10 +17,10 @@ public:
 	Set operator+(const Set& second);
 	Set operator-(const Set& second);
 
-	Set& operator+(int num);
-	Set& operator-(int num);
+	Set operator+(int num);
+	Set operator-(int num);
 
-	friend Set& operator+=(Set &_arr, int num);
+	Set& operator+=(int num);
 	Set& operator-=(int num);
 
 	Set intersection(const Set& second);
