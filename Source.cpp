@@ -6,16 +6,15 @@ int main() {
 		Set set1;
 		Set set2;
 		set1 += 6;
+		set2 = set1 + 999;
 		set1 += 7;
 		set1 += 8;
 		std::cout << "set 1: " << set1 << std::endl;
 
-		set2 = set1 + 55;
-		std::cout << "set 2: " << set2 << std::endl;
-		set2 -= 55;
+		//set2 = set1 + 55;
 		std::cout << "set 2: " << set2 << std::endl;
 
-		set2 = set1 - 6;
+		set2 = set1 - 9;
 		std::cout << "set 2: " << set2 << std::endl;
 
 		/*
