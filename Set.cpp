@@ -175,8 +175,10 @@ bool Set::check_count(const Set& second) { // элементы 1 множества хотя бы раз в
     {
         flag = false;
         for (int j = 0; j < second.size; j++) {
-            if (arr[i] == second.arr[j])
+            if (arr[i] == second.arr[j]) {
                 flag = true;
+                break;
+            }
         }
         if (flag == false)
             return false;
@@ -196,6 +198,7 @@ bool Set::operator==(const Set& second) { //равенство множеств
             for (int j = 0; j < second.size; j++) {
                 if (arr[i] == second.arr[j]) {
                     flag = true;
+                    break;
                 }
             }
             if (flag == false)
@@ -217,6 +220,7 @@ bool Set::operator!=(const Set& second) { //неравенство множеств
             for (int j = 0; j < second.size; j++) {
                 if (arr[i] == second.arr[j]) {
                     flag = false;
+                    break;
                 }
             }
             if (flag == true)

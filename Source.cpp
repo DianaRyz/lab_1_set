@@ -6,16 +6,26 @@ int main() {
 		Set set1;
 		Set set2;
 		set1 += 6;
-		set2 = set1 + 999;
 		set1 += 7;
 		set1 += 8;
+		set2 += 8;
+		set2 += 7;
+		set2 += 9;
 		std::cout << "set 1: " << set1 << std::endl;
 
 		//set2 = set1 + 55;
 		std::cout << "set 2: " << set2 << std::endl;
 
-		set2 = set1 - 9;
-		std::cout << "set 2: " << set2 << std::endl;
+		Set set3;
+		set3 = set1 - 7;
+		std::cout << "set 3: " << set3 << std::endl;
+
+		std::cout << "Task: " << set1.check_count(set2) << std::endl;
+		std::cout << "Equality: " << (set1 == set2) << std::endl;
+		std::cout << "! Equality: " << (set1 != set2) << std::endl;
+
+		/*set2 = set1 - 9;
+		std::cout << "set 2: " << set2 << std::endl;*/
 
 		/*
 		std::cout << "Equality: " << (set1 == set2) << std::endl;
